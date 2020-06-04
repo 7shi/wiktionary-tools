@@ -40,20 +40,12 @@ sys     0m2.063s
 # XML parse test
 
 ```
-$ time python countlines-yield.py
-lines: 215,082,554
-
-real    3m46.114s
-user    3m43.766s
-sys     0m2.297s
-```
-```
 $ time python countlines-text.py
 lines: 76,501,897
 
-real    4m45.896s
-user    4m43.578s
-sys     0m2.078s
+real    4m17.963s
+user    4m15.969s
+sys     0m1.891s
 ```
 ```
 $ time python countlines-text-xml.py
@@ -69,16 +61,16 @@ sys     0m3.500s
 ```
 $ time python checklang.py
 
-real    5m14.153s
-user    5m9.203s
-sys     0m4.734s
+real    4m42.539s
+user    4m37.313s
+sys     0m5.031s
 ```
 ```
 $ time python checklang-re.py
 
-real    6m11.350s
-user    6m6.141s
-sys     0m5.063s
+real    5m22.396s
+user    5m17.609s
+sys     0m4.703s
 ```
 ```
 $ time python checklang-xml.py
@@ -100,16 +92,16 @@ sys     0m6.578s
 ```
 $ time python checklang-parallel.py
 
-real    1m15.603s
-user    9m19.672s
-sys     0m9.094s
+real    1m16.566s
+user    8m43.188s
+sys     0m9.281s
 ```
 ```
 $ time python checklang-parallel-re.py
 
-real    1m27.347s
-user    10m57.672s
-sys     0m9.313s
+real    1m21.199s
+user    10m9.422s
+sys     0m8.844s
 ```
 ```
 $ time python checklang-parallel-xml.py
