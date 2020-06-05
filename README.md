@@ -1,4 +1,4 @@
-This repository contains a script that processes the Wiktionary dump data.
+This repository contains scripts that process the Wiktionary dump data.
 
 # XML tag checker
 
