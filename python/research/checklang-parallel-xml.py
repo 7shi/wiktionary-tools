@@ -46,7 +46,7 @@ if __name__ == "__main__":
 
     results, langs = [], {}
     with concurrent.futures.ProcessPoolExecutor() as executor:
-        for i, result in enumerate(executor.map(getlangs, poslens)):
+        for result in executor.map(getlangs, poslens):
             for id, lang in result:
                 if lang in langs:
                     lid = langs[lang]
