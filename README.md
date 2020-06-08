@@ -2,25 +2,25 @@ This repository contains scripts that process the Wiktionary dump data.
 
 # XML tag checker
 
+[XMLのタグの構造と出現数を調べる](https://qiita.com/7shi/items/022c58cf9a86ced595ef)
+
 * fsharp/CheckTag.fsx
 
-cf. [XMLのタグの構造と出現数を調べる](https://qiita.com/7shi/items/022c58cf9a86ced595ef)
-
 # dump viewer
+
+[Wikipediaのダンプからページを取り出す](https://qiita.com/7shi/items/7a4aa381ec3dc97bd0f2)
 
 * python/conv\_index.py
 * python/mediawiki.py
 
-cf. [Wikipediaのダンプからページを取り出す](https://qiita.com/7shi/items/7a4aa381ec3dc97bd0f2)
-
 # research for parse texts
+
+[Wiktionaryの効率的な処理方法を探る](https://qiita.com/7shi/items/e8091f6ac72491ad45a6) 
 
 * python/research/
 
-cf. [Wiktionaryの効率的な処理方法を探る](https://qiita.com/7shi/items/e8091f6ac72491ad45a6) 
-
 # SQL dump to TSV converter
 
-* sql2tsv/
+[MySQLのダンプをTSVに変換するスクリプトを書く](https://qiita.com/7shi/items/c296a168d53c7af28942)
 
-cf. [MySQLのダンプをTSVに変換するスクリプトを書く](https://qiita.com/7shi/items/c296a168d53c7af28942)
+* sql2tsv/
