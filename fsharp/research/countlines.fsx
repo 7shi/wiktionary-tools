@@ -3,10 +3,7 @@ open System
 open System.IO
 open System.IO.Compression
 
-let target =
-    use sr = new StreamReader("streamlen.tsv")
-    sr.ReadLine()
-
+let target = "enwiktionary-20200501-pages-articles-multistream.xml.bz2"
 let mutable lines = 0
 do
     use fs = new FileStream(target, FileMode.Open)
