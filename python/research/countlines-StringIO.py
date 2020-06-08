@@ -1,6 +1,9 @@
-import mediawiki_parse, bz2, io
+import bz2, io
 
-target, spos, slen = mediawiki_parse.read()
+with open("streamlen.tsv") as f:
+    target = f.readline().strip()
+    slen = [int(line) for line in f.readlines()]
+
 lines = 0
 with open(target, "rb") as f:
     for length in slen:

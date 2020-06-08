@@ -1,4 +1,8 @@
-import mediawiki_parse, bz2, io, xml.etree.ElementTree as ET
+import bz2, io, xml.etree.ElementTree as ET
+
+with open("streamlen.tsv") as f:
+    target = f.readline().strip()
+    slen = [int(line) for line in f.readlines()]
 
 def getpages(bz2data):
     xml = bz2.decompress(bz2data).decode("utf-8")
@@ -19,7 +23,6 @@ def getpages(bz2data):
                         yield line
                 yield id, text
 
-target, spos, slen = mediawiki_parse.read()
 lines = 0
 with open(target, "rb") as f:
     f.seek(slen[0])
