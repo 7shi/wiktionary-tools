@@ -16,25 +16,25 @@ sys     0m0.953s
 $ time python countlines.py
 lines: 215,082,554
 
-real    3m41.572s
-user    3m40.031s
-sys     0m1.469s
+real    3m34.911s
+user    3m33.625s
+sys     0m1.188s
 ```
 ```
 $ time python countlines-BytesIO.py
 lines: 215,082,554
 
-real    3m40.948s
-user    3m39.359s
-sys     0m1.578s
+real    3m37.827s
+user    3m36.250s
+sys     0m1.547s
 ```
 ```
 $ time python countlines-StringIO.py
 lines: 215,082,554
 
-real    3m19.107s
-user    3m16.891s
-sys     0m2.063s
+real    3m18.568s
+user    3m16.438s
+sys     0m2.047s
 ```
 
 # XML parse test
@@ -43,17 +43,41 @@ sys     0m2.063s
 $ time python countlines-text.py
 lines: 76,501,897
 
-real    4m17.963s
-user    4m15.969s
-sys     0m1.891s
+real    4m6.555s
+user    4m4.203s
+sys     0m2.328s
 ```
 ```
 $ time python countlines-text-xml.py
 lines: 76,501,897
 
-real    6m6.185s
-user    6m2.609s
-sys     0m3.500s
+real    5m50.826s
+user    5m47.047s
+sys     0m3.531s
+```
+```
+$ time python countlines-text-xmlpull.py
+lines: 76,501,897
+
+real    6m4.553s
+user    6m1.047s
+sys     0m3.375s
+```
+```
+$ time python countlines-text-xmliter.py
+lines: 76,501,897
+
+real    6m29.298s
+user    6m24.734s
+sys     0m4.359s
+```
+```
+$ time python countlines-text-xmlparser.py
+lines: 76,501,897
+
+real    6m46.163s
+user    6m43.703s
+sys     0m2.391s
 ```
 
 # create the language table
@@ -61,30 +85,37 @@ sys     0m3.500s
 ```
 $ time python checklang.py
 
-real    4m42.539s
-user    4m37.313s
-sys     0m5.031s
+real    4m26.421s
+user    4m21.344s
+sys     0m4.891s
+```
+```
+$ time python checklang-ch.py
+
+real    4m30.566s
+user    4m26.188s
+sys     0m4.297s
 ```
 ```
 $ time python checklang-re.py
 
-real    5m22.396s
-user    5m17.609s
-sys     0m4.703s
+real    5m9.869s
+user    5m5.625s
+sys     0m4.047s
 ```
 ```
 $ time python checklang-xml.py
 
-real    11m13.486s
-user    11m6.516s
-sys     0m6.563s
+real    9m55.814s
+user    9m49.188s
+sys     0m6.438s
 ```
 ```
 $ time python checklang-xml-re.py
 
-real    11m56.370s
-user    11m49.297s
-sys     0m6.578s
+real    10m41.234s
+user    10m34.906s
+sys     0m6.266s
 ```
 
 # parallelize
@@ -99,21 +130,21 @@ sys     0m9.281s
 ```
 $ time python checklang-parallel-re.py
 
-real    1m21.199s
-user    10m9.422s
-sys     0m8.844s
+real    1m19.372s
+user    9m44.422s
+sys     0m9.203s
 ```
 ```
 $ time python checklang-parallel-xml.py
 
-real    1m51.803s
-user    14m4.406s
-sys     0m14.000s
+real    1m52.676s
+user    13m57.469s
+sys     0m13.797s
 ```
 ```
 $ time python checklang-parallel-xml-re.py
 
-real    2m6.238s
-user    15m58.641s
-sys     0m14.641s
+real    2m6.217s
+user    16m0.172s
+sys     0m14.203s
 ```
