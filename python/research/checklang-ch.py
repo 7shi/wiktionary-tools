@@ -1,4 +1,4 @@
-import mediawiki_parse, re
+import mediawiki_parse
 
 target, _, slen = mediawiki_parse.read()
 getpages = mediawiki_parse.getpages
@@ -8,8 +8,11 @@ with open(target, "rb") as f:
     for length in slen[1:-1]:
         for id, text in getpages(f.read(length)):
             for line in text():
-                if (m := re.match("==([^=].*)==", line)):
-                    lang = m[1].strip()
+                if len(line) >= 3 and line[0] == '=' and line[1] == '=' and line[2] != '=':
+                    lang = line[2:].strip()
+                    e = len(lang) - 1
+                    while e > 0 and lang[e] == '=': e -= 1
+                    lang = lang[: e + 1].strip()
                     if lang in langs:
                         lid = langs[lang]
                     else:

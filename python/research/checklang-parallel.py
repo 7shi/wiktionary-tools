@@ -1,38 +1,6 @@
-import bz2, io
+import mediawiki_parse
 
-def getpages(bz2data):
-    ns = 0
-    id = 0
-    revision = False
-    with io.StringIO(bz2.decompress(bz2data).decode("utf-8")) as t:
-        while (line := t.readline()):
-            line = line.lstrip()
-            if line.startswith("<ns>"):
-                ns = int(line[4:line.find("<", 4)])
-            elif not revision and line.startswith("<id>"):
-                id = int(line[4:line.find("<", 4)])
-            elif line.startswith("<revision>"):
-                revision = True
-            elif line.startswith("<text "):
-                revision = False
-                p = line.find(">")
-                if line[p - 1] == "/": continue
-                if ns != 0:
-                    while not line.endswith("</text>\n"):
-                        line = t.readline()
-                    continue
-                first = line[p + 1:]
-                def text():
-                    line = first
-                    while line:
-                        if line.endswith("</text>\n"):
-                            line = line[:-8]
-                            if line: yield line
-                            break
-                        else:
-                            yield line
-                        line = t.readline()
-                yield id, text
+getpages = mediawiki_parse.getpages
 
 def getlangs(args):
     target, pos, length = args
@@ -52,15 +20,7 @@ def getlangs(args):
 if __name__ == "__main__":
     import concurrent.futures
 
-    spos, slen = [], []
-    with open("streamlen.tsv") as f:
-        target = f.readline().strip()
-        pos = 0
-        while (line := f.readline()):
-            length = int(line)
-            spos.append(pos)
-            slen.append(length)
-            pos += length
+    target, spos, slen = mediawiki_parse.read()
     slen.pop()
     split = 10
     poslens = [(target, spos[i], sum(slen[i : i + split]))

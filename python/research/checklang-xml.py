@@ -1,21 +1,7 @@
-import bz2, io, xml.etree.ElementTree as ET
+import mediawiki_parse
 
-with open("streamlen.tsv") as f:
-    target = f.readline().strip()
-    slen = [int(line) for line in f.readlines()]
-
-def getpages(bz2data):
-    xml = bz2.decompress(bz2data).decode("utf-8")
-    pages = ET.fromstring(f"<pages>{xml}</pages>")
-    for page in pages:
-        if int(page.find("ns").text) == 0:
-            id = int(page.find("id").text)
-            with io.StringIO(page.find("revision/text").text) as t:
-                def text():
-                    while (line := t.readline()):
-                        yield line
-                yield id, text
-
+target, _, slen = mediawiki_parse.read()
+getpages = mediawiki_parse.getpages_xml
 results, langs = [], {}
 with open(target, "rb") as f:
     f.seek(slen[0])

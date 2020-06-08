@@ -1,16 +1,6 @@
-import bz2, io, xml.etree.ElementTree as ET
+import mediawiki_parse
 
-def getpages(bz2data):
-    xml = bz2.decompress(bz2data).decode("utf-8")
-    pages = ET.fromstring(f"<pages>{xml}</pages>")
-    for page in pages:
-        if int(page.find("ns").text) == 0:
-            id = int(page.find("id").text)
-            with io.StringIO(page.find("revision/text").text) as t:
-                def text():
-                    while (line := t.readline()):
-                        yield line
-                yield id, text
+getpages = mediawiki_parse.getpages_xml
 
 def getlangs(args):
     target, pos, length = args
@@ -30,15 +20,7 @@ def getlangs(args):
 if __name__ == "__main__":
     import concurrent.futures
 
-    spos, slen = [], []
-    with open("streamlen.tsv") as f:
-        target = f.readline().strip()
-        pos = 0
-        while (line := f.readline()):
-            length = int(line)
-            spos.append(pos)
-            slen.append(length)
-            pos += length
+    target, spos, slen = mediawiki_parse.read()
     slen.pop()
     split = 10
     poslens = [(target, spos[i], sum(slen[i : i + split]))
