@@ -19,6 +19,10 @@ This repository contains scripts that process the Wiktionary dump data.
 
 * python/research/
 
+[Wiktionaryの全文処理をF#とPythonで速度比較](https://qiita.com/7shi/items/1d6b97c657c6fffdbd70)
+
+* fsharp/research/
+
 # SQL dump to TSV converter
 
 [MySQLのダンプをTSVに変換するスクリプトを書く](https://qiita.com/7shi/items/c296a168d53c7af28942)
