@@ -3,7 +3,7 @@ CPU: AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx (4 cores)
 # count lines
 
 ```
-$ cd .; time ./countlines.exe
+$ time ./countlines.exe
 lines: 215,082,554
 
 real    2m40.270s
