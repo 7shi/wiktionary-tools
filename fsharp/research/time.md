@@ -1,4 +1,9 @@
-CPU: AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx (4 cores)
+Environment
+
+* OS : Windows 10 1909
+* CPU: AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx (4 cores)
+* .NET Framework 4.8.03752
+* Mono 6.4.0 (WSL1)
 
 # count lines
 
