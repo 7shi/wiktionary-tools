@@ -3,6 +3,7 @@ Environment
 * OS : Windows 10 1909
 * CPU: AMD Ryzen 5 2500U with Radeon Vega Mobile Gfx (4 cores)
 * .NET Framework 4.8.03752
+* .NET Core 3.1.103 (WSL1)
 * Mono 6.4.0 (WSL1)
 
 # count lines
@@ -99,6 +100,12 @@ $ time ./checklang.exe
 
 real    3m24.302s
 
+$ time dotnet checklang.exe
+
+real    3m25.545s
+user    3m24.109s
+sys     0m1.844s
+
 $ time mono checklang.exe
 
 real    4m22.330s
@@ -136,6 +143,12 @@ $ time ./checklang-re.exe
 
 real    3m46.270s
 
+$ time dotnet checklang-re.exe
+
+real    3m42.882s
+user    3m41.328s
+sys     0m2.016s
+
 $ time mono checklang-re.exe
 
 real    4m51.236s
@@ -150,6 +163,12 @@ $ time ./checklang-parallel.exe
 
 real    1m3.941s
 
+$ time dotnet checklang-parallel.exe
+
+real    0m59.014s
+user    6m8.141s
+sys     0m6.563s
+
 $ time mono checklang-parallel.exe
 
 real    2m39.716s
@@ -160,6 +179,12 @@ sys     0m46.813s
 $ time ./checklang-parallel-re.exe
 
 real    1m7.009s
+
+$ time dotnet checklang-parallel-re.exe
+
+real    1m6.136s
+user    6m46.281s
+sys     0m7.297s
 
 $ time mono checklang-parallel-re.exe
 
