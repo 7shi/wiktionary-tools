@@ -9,7 +9,7 @@ def getlangs(args):
         bz2data = f.read(length)
     result = []
     for id, text in getpages(bz2data):
-        for line in text():
+        for line in text:
             if (m := re.match("==([^=].*)==", line)):
                 result.append((id, m[1].strip()))
     return result

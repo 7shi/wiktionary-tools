@@ -10,10 +10,7 @@ def getpages(bz2data):
     for page in pages:
         if int(page.find("ns").text) == 0:
             id = int(page.find("id").text)
-            with io.StringIO(page.find("revision/text").text) as t:
-                def text():
-                    while (line := t.readline()):
-                        yield line
+            with io.StringIO(page.find("revision/text").text) as text:
                 yield id, text
 
 lines = 0
@@ -21,6 +18,6 @@ with open(target, "rb") as f:
     f.seek(slen[0])
     for length in slen[1:-1]:
         for id, text in getpages(f.read(length)):
-            for line in text():
+            for line in text:
                 lines += 1
 print(f"lines: {lines:,}")

@@ -32,13 +32,13 @@ def getpages(bz2data):
                         else:
                             yield line
                         line = t.readline()
-                yield id, text
+                yield id, text()
 
 lines = 0
 with open(target, "rb") as f:
     f.seek(slen[0])
     for length in slen[1:-1]:
         for id, text in getpages(f.read(length)):
-            for line in text():
+            for line in text:
                 lines += 1
 print(f"lines: {lines:,}")

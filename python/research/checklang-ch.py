@@ -7,7 +7,7 @@ with open(target, "rb") as f:
     f.seek(slen[0])
     for length in slen[1:-1]:
         for id, text in getpages(f.read(length)):
-            for line in text():
+            for line in text:
                 if len(line) >= 3 and line[0] == '=' and line[1] == '=' and line[2] != '=':
                     lang = line[2:].strip()
                     e = len(lang) - 1

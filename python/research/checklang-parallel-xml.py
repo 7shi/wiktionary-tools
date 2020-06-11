@@ -9,7 +9,7 @@ def getlangs(args):
         bz2data = f.read(length)
     result = []
     for id, text in getpages(bz2data):
-        for line in text():
+        for line in text:
             if line.startswith("==") and not line.startswith("==="):
                 lang = line[2:].strip()
                 e = len(lang) - 1

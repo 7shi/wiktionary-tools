@@ -17,10 +17,7 @@ def getpages(bz2data):
         elif id == 0 and el.tag == "id":
             id = int(el.text)
         elif ns == 0 and el.tag == "text":
-            with io.StringIO(el.text) as t:
-                def text():
-                    while (line := t.readline()):
-                        yield line
+            with io.StringIO(el.text) as text:
                 yield id, text
 
 lines = 0
@@ -28,6 +25,6 @@ with open(target, "rb") as f:
     f.seek(slen[0])
     for length in slen[1:-1]:
         for id, text in getpages(f.read(length)):
-            for line in text():
+            for line in text:
                 lines += 1
 print(f"lines: {lines:,}")
