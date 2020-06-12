@@ -28,3 +28,9 @@ This repository contains scripts that process the Wiktionary dump data.
 [MySQLのダンプをTSVに変換するスクリプトを書く](https://qiita.com/7shi/items/c296a168d53c7af28942)
 
 * sql2tsv/
+
+# collecting English irregular verbs
+
+* python/en-verb/
+
+[Wiktionaryで英語の不規則動詞を調査](https://qiita.com/7shi/items/2a945c346f74ca54552f)
