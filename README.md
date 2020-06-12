@@ -31,6 +31,6 @@ This repository contains scripts that process the Wiktionary dump data.
 
 # collecting English irregular verbs
 
-* python/en-verb/
-
 [Wiktionaryで英語の不規則動詞を調査](https://qiita.com/7shi/items/2a945c346f74ca54552f)
+
+* python/en-verb/
