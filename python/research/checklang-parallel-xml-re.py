@@ -7,10 +7,11 @@ def getlangs(args):
     with open(target, "rb") as f:
         f.seek(pos)
         bz2data = f.read(length)
+    pattern = re.compile("==([^=].*)==")
     result = []
     for id, text in getpages(bz2data):
         for line in text:
-            if (m := re.match("==([^=].*)==", line)):
+            if (m := pattern.match(line)):
                 result.append((id, m[1].strip()))
     return result
 

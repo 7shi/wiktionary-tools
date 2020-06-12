@@ -1,17 +1,16 @@
 import mediawiki_parse, re
 
-getpages = mediawiki_parse.getpages
+getpages = mediawiki_parse.getpages_xml
 
 def getlangs(args):
     target, pos, length = args
     with open(target, "rb") as f:
         f.seek(pos)
         bz2data = f.read(length)
-    pattern = re.compile("==([^=].*)==")
     result = []
     for id, text in getpages(bz2data):
         for line in text:
-            if (m := pattern.match(line)):
+            if (m := re.match("==([^=].*)==", line)):
                 result.append((id, m[1].strip()))
     return result
 
