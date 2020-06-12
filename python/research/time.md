@@ -89,37 +89,51 @@ sys     0m2.391s
 ```
 $ time python checklang.py
 
-real    4m26.421s
-user    4m21.344s
-sys     0m4.891s
+real    4m35.440s
+user    4m29.844s
+sys     0m4.672s
 ```
 ```
 $ time python checklang-ch.py
 
-real    4m30.566s
-user    4m26.188s
-sys     0m4.297s
+real    4m37.771s
+user    4m33.219s
+sys     0m4.281s
 ```
 ```
 $ time python checklang-re.py
 
-real    5m9.869s
-user    5m5.625s
-sys     0m4.047s
+real    4m31.855s
+user    4m26.375s
+sys     0m5.250s
+```
+```
+$ time python checklang-re-not-compile.py
+
+real    5m16.428s
+user    5m11.281s
+sys     0m5.078s
 ```
 ```
 $ time python checklang-xml.py
 
-real    9m55.814s
-user    9m49.188s
-sys     0m6.438s
+real    10m12.721s
+user    10m6.813s
+sys     0m5.875s
 ```
 ```
 $ time python checklang-xml-re.py
 
-real    10m41.234s
-user    10m34.906s
-sys     0m6.266s
+real    9m59.988s
+user    9m53.484s
+sys     0m6.297s
+```
+```
+$ time python checklang-xml-re-not-compile.py
+
+real    11m2.035s
+user    10m55.203s
+sys     0m6.656s
 ```
 
 # parallelize
@@ -134,21 +148,35 @@ sys     0m9.281s
 ```
 $ time python checklang-parallel-re.py
 
-real    1m19.372s
-user    9m44.422s
-sys     0m9.203s
+real    1m7.106s
+user    8m12.281s
+sys     0m8.953s
+```
+```
+$ time python checklang-parallel-re-not-compile.py
+
+real    1m19.153s
+user    9m46.391s
+sys     0m9.016s
 ```
 ```
 $ time python checklang-parallel-xml.py
 
-real    1m52.676s
-user    13m57.469s
-sys     0m13.797s
+real    1m49.075s
+user    13m33.594s
+sys     0m13.922s
 ```
 ```
 $ time python checklang-parallel-xml-re.py
 
-real    2m6.217s
-user    16m0.172s
-sys     0m14.203s
+real    1m49.981s
+user    13m38.625s
+sys     0m14.688s
+```
+```
+$ time python checklang-parallel-xml-re-not-compile.py
+
+real    2m1.814s
+user    15m12.047s
+sys     0m14.391s
 ```
