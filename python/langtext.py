@@ -46,7 +46,7 @@ def langtext(args):
     for id, title, text in getpages(bz2data):
         for lang, text2 in splittext(pattern, text):
             if lang in langs:
-                result[lang].append((title, list(text2)))
+                result[lang].append((title, "".join(text2).strip()))
     return result
 
 if __name__ == "__main__":
@@ -63,45 +63,22 @@ if __name__ == "__main__":
     poslens = [(langs, target, spos[i], sum(slen[i : i + split]))
                for i in range(1, len(slen), split)]
 
-    class LangData:
-        def __init__(self):
-            self.words = {}
-            self.texts = []
     langdata = {}
-    for lang in langs: langdata[lang] = LangData()
+    for lang in langs: langdata[lang] = []
     with concurrent.futures.ProcessPoolExecutor() as executor:
         for i, result in enumerate(executor.map(langtext, poslens)):
             sys.stdout.write(f"\r{i + 1:,} / {len(poslens):,}")
             sys.stdout.flush()
             for lang in langs:
-                ld = langdata[lang]
-                rs = result[lang]
-                index = len(ld.texts)
-                ld.texts += rs
-                for i, r in enumerate(rs):
+                for r in result[lang]:
                     word = r[0].lower().replace("-", "")
-                    ld.words[word] = index + i
+                    langdata[lang].append((word, r))
     print()
     for lang in langs:
         ld = langdata[lang]
-        print(f"{lang}: {len(ld.texts):,}")
+        print(f"{lang}: {len(ld):,}")
+        ld.sort(key=lambda x:x[0])
         with open(f"{lang}.txt", "w", encoding="utf-8") as f:
-            for i, w in enumerate(sorted(ld.words.keys())):
+            for i, (_, (title, text)) in enumerate(ld):
                 if i > 0: f.write("\n")
-                word, text = ld.texts[ld.words[w]]
-                f.write(f"=={word}==\n\n")
-                first = True
-                nl = 0
-                for line in text:
-                    if line == "\n":
-                        nl += 1
-                    else:
-                        if nl > 0:
-                            if first:
-                                first = False
-                            else:
-                                f.write("\n" * nl)
-                            nl = 0
-                        f.write(line)
-                        if not line.endswith("\n"):
-                            f.write("\n")
+                f.write(f"<!-- <title>{title}</title> -->\n\n{text}\n")
