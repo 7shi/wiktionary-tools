@@ -18,8 +18,12 @@ for i, (id, title) in enumerate(db.cur.execute(
         sys.stderr.flush()
     if pattern.search(title):
         pages.append((title.strip().lower().replace("-", ""), id))
+sys.stderr.write("\n")
+if not pages:
+    sys.stderr.write("no pages\n")
+    exit(0)
 
-sys.stderr.write("\nSorting...\n")
+sys.stderr.write("Sorting...\n")
 pages.sort(key=lambda x:x[0])
 
 with open(output, "w", encoding="utf-8") as f:
