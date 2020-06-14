@@ -1,7 +1,7 @@
 # create DB
 
 ```
-$ time python db-make.py ../enwiktionary-20200501-pages-articles-multistream.xml.bz2
+$ time python db-make.py enwiktionary-20200501-pages-articles-multistream.xml.bz2
 934,033,103 / 934,033,103 | 68,608
 writing DB files...
 
@@ -88,15 +88,15 @@ user    0m9.641s
 sys     0m0.578s
 ```
 ```
-$ time python collect-lang.py enwiktionary.db Estonian
-reading positions... 8,756 / 8,756
-optimizing... 3,970 -> 3,053
-reading streams... 3,053 / 3,053
-Estonian: 8,756
+$ time python collect-lang.py enwiktionary.db Russian
+reading positions... 394,340 / 394,340
+optimizing... 16,190 -> 6,887
+reading streams... 6,887 / 6,887
+Russian: 394,340
 
-real    0m8.864s
-user    1m0.891s
-sys     0m4.516s
+real    0m37.653s
+user    3m38.031s
+sys     0m23.781s
 ```
 ```
 $ time python collect-lang.py enwiktionary.db Arabic Estonian Hebrew Hittite Ido Interlingua Interlingue Novial "Old English" "Old High German" "Old Saxon" Phoenician Vietnamese Volapük Yiddish
