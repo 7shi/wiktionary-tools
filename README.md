@@ -10,8 +10,8 @@ This repository contains scripts that process the Wiktionary dump data.
 
 [Wikipediaのダンプからページを取り出す](https://qiita.com/7shi/items/7a4aa381ec3dc97bd0f2)
 
-* python/conv\_index.py
-* python/mediawiki.py
+* python/etc/conv\_index.py
+* python/etc/mediawiki.py
 
 # research for parse texts
 
