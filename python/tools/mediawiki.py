@@ -7,14 +7,14 @@ def usage():
     print("    -x XML <page>")
     print("    -s XML <siteinfo>")
     print("    -i search by id")
-    print("")
     exit(1)
 
 class DB:
     def __init__(self, db):
+        with open(db, "rb") as f: pass
         self.conn   = sqlite3.connect(db)
         self.cur    = self.conn.cursor()
-        self.xmlbz2 = self.setting("target")
+        self.target = self.setting("target")
         self.ns     = {}
         self.max    = self.cur.execute("SELECT MAX(id ) FROM pages  ").fetchone()[0]
         self.bmax   = self.cur.execute("SELECT MAX(sid) FROM streams").fetchone()[0] - 1
@@ -58,7 +58,7 @@ class DB:
             "SELECT spos, slen FROM streams WHERE sid = ?", (blockid,)).fetchone()
         if not result: return None
         start, length = result
-        with open(self.xmlbz2, "rb") as f:
+        with open(self.target, "rb") as f:
             f.seek(start)
             block = f.read(length)
         data = bz2.decompress(block)
@@ -92,19 +92,6 @@ def to_xml(elem):
         tree = ET.ElementTree(elem)
         tree.write(f, encoding="utf-8")
         return f.getvalue().decode(encoding="utf-8")
-
-def split_text(pattern, text):
-    line = next(text, "")
-    while line:
-        m = pattern.match(line)
-        line = next(text, "")
-        if m:
-            def g():
-                nonlocal line
-                while line and not pattern.match(line):
-                    yield line
-                    line = next(text, "")
-            yield m[1].strip(), g()
 
 if __name__ == "__main__":
     index = None

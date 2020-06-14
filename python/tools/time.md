@@ -3,10 +3,11 @@
 ```
 $ time python db-make.py ../enwiktionary-20200501-pages-articles-multistream.xml.bz2
 934,033,103 / 934,033,103 | 68,608
+writing DB files...
 
-real    19m4.516s
-user    18m40.453s
-sys     0m14.375s
+real    4m20.995s
+user    9m22.906s
+sys     0m42.172s
 ```
 ```
 $ time sqlite3 enwiktionary.db ".read db.sql"
@@ -17,17 +18,17 @@ importing 'db-pages.tsv'...
 importing 'db-idlang.tsv'...
 importing 'db-langname.tsv'...
 
-real    0m46.009s
-user    0m33.875s
-sys     0m10.828s
+real    0m46.785s
+user    0m34.641s
+sys     0m10.578s
 ```
 ```
 $ time sqlite3 enwiktionary.db ".read langcode.sql"
 Importing 'langcode.tsv'...
 
 real    0m0.082s
-user    0m0.047s
-sys     0m0.000s
+user    0m0.016s
+sys     0m0.078s
 ```
 
 # tests
@@ -87,27 +88,21 @@ user    0m9.641s
 sys     0m0.578s
 ```
 ```
-$ time python collect-lang.py enwiktionary.db Estonian.txt Estonian
-reading `pages`... 8,756 / 8,756
-Sorting...
-writing `pages`... 8,756 / 8,756
-
-real    1m22.247s
-user    1m14.797s
-sys     0m6.406s
-```
-```
-$ time python langtext.py Estonian
-6,861 / 6,861
+$ time python collect-lang.py enwiktionary.db Estonian
+reading positions... 8,756 / 8,756
+optimizing... 3,970 -> 3,053
+reading streams... 3,053 / 3,053
 Estonian: 8,756
 
-real    1m50.057s
-user    13m49.750s
-sys     0m20.344s
+real    0m8.864s
+user    1m0.891s
+sys     0m4.516s
 ```
 ```
-$ time python langtext.py Arabic Estonian Hebrew Hittite Ido Interlingua Interlingue Novial "Old English" "Old High German" "Old Saxon" Phoenician Vietnamese Volapük Yiddish
-6,861 / 6,861
+$ time python collect-lang.py enwiktionary.db Arabic Estonian Hebrew Hittite Ido Interlingua Interlingue Novial "Old English" "Old High German" "Old Saxon" Phoenician Vietnamese Volapük Yiddish
+reading positions... 143,926 / 143,926
+optimizing... 25,073 -> 10,386
+reading streams... 10,386 / 10,386
 Arabic: 50,380
 Estonian: 8,756
 Hebrew: 9,845
@@ -124,7 +119,7 @@ Vietnamese: 25,588
 Volapük: 3,918
 Yiddish: 6,324
 
-real    1m56.919s
-user    14m23.703s
-sys     0m16.141s
+real    0m51.764s
+user    5m44.953s
+sys     0m20.922s
 ```

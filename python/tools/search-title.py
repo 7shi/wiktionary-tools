@@ -7,6 +7,7 @@ except:
     exit(1)
 
 titles = {}
+with open(db, "rb") as f: pass
 with sqlite3.connect(db) as conn:
     cur = conn.cursor()
     count = cur.execute("SELECT COUNT(*) FROM pages").fetchone()[0]

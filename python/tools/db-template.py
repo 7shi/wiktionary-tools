@@ -1,4 +1,4 @@
-import sqlite3, sys
+import sqlite3, os, sys
 
 try:
     db = sys.argv[1]
@@ -6,6 +6,7 @@ except:
     sys.stderr.write(f"usage: {sys.argv[0]} db\n")
     exit(1)
 
+with open(db, "rb") as f: pass
 with sqlite3.connect(db) as conn:
     cur = conn.cursor()
 
