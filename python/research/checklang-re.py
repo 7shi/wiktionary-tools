@@ -23,7 +23,5 @@ with open("output1.tsv", "w", encoding="utf-8") as f:
         f.write(f"{id}\t{lid}\n")
 
 with open("output2.tsv", "w", encoding="utf-8") as f:
-    ls = list(langs.items())
-    ls.sort(key=lambda kv: kv[1])
-    for k, v in ls:
+    for k, v in langs.items():
         f.write(f"{v}\t{k}\n")
