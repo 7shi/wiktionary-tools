@@ -1,5 +1,5 @@
 test:
-	python db-make.py enwiktionary-20200501-pages-articles-multistream.xml.bz2
+	python db-make.py ~/share/wiktionary/enwiktionary-20200501-pages-articles-multistream.xml.bz2
 	sqlite3 enwiktionary.db ".read db.sql"
 	sqlite3 enwiktionary.db ".read langcode.sql"
 	python db-template.py enwiktionary.db

@@ -53,9 +53,9 @@ if __name__ == "__main__":
     idlang     = []
     langname   = {}
 
-    def f():
+    def f(g):
         global spos
-        for sid, slen, data in getstreams(target):
+        for sid, slen, data in g:
             streams.append((sid, spos, slen))
             spos += slen
             sys.stderr.write(f"\r{spos:,} / {targetlen:,} | {sid:,}")
@@ -69,7 +69,7 @@ if __name__ == "__main__":
                 yield sid, data
 
     with concurrent.futures.ProcessPoolExecutor() as executor:
-        for pgs, idl in executor.map(getlangs, f()):
+        for pgs, idl in executor.map(getlangs, f(getstreams(target))):
             pages += pgs
             for id, lang in idl:
                 if lang in langname:
