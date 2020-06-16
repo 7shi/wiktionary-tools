@@ -1,16 +1,16 @@
 import sys
 verbs = {}
 for line in sys.stdin:
-    id, verb, *forms = line.strip().split("\t")
+    verb, *forms = line.strip().split("\t")
     if verb in verbs: continue
-    verbs[verb] = (id, forms)
+    verbs[verb] = forms
 verbs2 = []
-for v1, (id, forms) in verbs.items():
+for v1 in verbs.items():
     contains = False
-    for v2, (_, f2) in verbs.items():
-        if v1 != v2 and v1.endswith(v2):
+    for v2 in verbs.items():
+        if v1[0] != v2[0] and v1[0].endswith(v2[0]):
             c = True
-            for f1, f2 in zip(forms, f2):
+            for f1, f2 in zip(v1[1], v2[1]):
                 if not f1.endswith(f2):
                     c = False
                     break
@@ -18,5 +18,4 @@ for v1, (id, forms) in verbs.items():
                 contains = True
                 break
     if not contains:
-        forms = "\t".join(forms)
-        print(f"{id}\t{v1}\t{forms}")
+        print("\t".join([v1[0]] + v1[1]))
