@@ -1,5 +1,5 @@
 import re, sys
-pattern1 = re.compile("\[\[(.+?)\]\]")
+pattern1 = re.compile(r"\[\[(.+?)\]\]")
 pattern2 = re.compile("<!--(.*?)-->")
 for line in sys.stdin:
     while (m := pattern1.search(line)):
