@@ -88,6 +88,23 @@ user    0m9.641s
 sys     0m0.578s
 ```
 ```
+$ time python collect-lang.py enwiktionary.db English
+reading positions... 928,987 / 928,987
+optimizing... 49,835 -> 6,575
+reading streams... 6,575 / 6,575
+English: 928,988
+
+real    2m8.564s
+user    12m14.250s
+sys     1m8.875s
+
+$ wc -l English.txt
+14461960 English.txt
+
+$ wc --bytes English.txt
+452471057 English.txt
+```
+```
 $ time python collect-lang.py enwiktionary.db Russian
 reading positions... 394,340 / 394,340
 optimizing... 16,190 -> 6,887
@@ -97,6 +114,12 @@ Russian: 394,340
 real    0m37.653s
 user    3m38.031s
 sys     0m23.781s
+
+$ wc -l Russian.txt
+4720984 Russian.txt
+
+$ wc --bytes Russian.txt
+109618281 Russian.txt
 ```
 ```
 $ time python collect-lang.py enwiktionary.db Arabic Estonian Hebrew Hittite Ido Interlingua Interlingue Novial "Old English" "Old High German" "Old Saxon" Phoenician Vietnamese Volapük Yiddish
