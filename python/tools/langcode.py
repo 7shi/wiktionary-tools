@@ -12,17 +12,20 @@ pattern1 = re.compile(r'm\["(.+?)"\]')
 pattern2 = re.compile('"(.+?)"')
 
 def read(title):
-    with io.StringIO(db[title].text) as f:
+    page = db[title]
+    if not page: return
+    with io.StringIO(page.text) as f:
         while (line := next(f, "")):
             if (m1 := pattern1.match(line)):
                 line = next(f, "")
                 if (m2 := pattern2.search(line)):
                     langs[m1[1]] = m2[1]
 
-read("Module:languages/data2")
+module = db.ns[828]
+read(f"{module}:languages/data2")
 for i in range(ord("a"), ord("z") + 1):
-    read(f"Module:languages/data3/{chr(i)}")
-read("Module:languages/datax")
+    read(f"{module}:languages/data3/{chr(i)}")
+read(f"{module}:languages/datax")
 
 with open("langcode.tsv", "w", encoding="utf-8") as f:
     for code, name in langs.items():
