@@ -1,6 +1,7 @@
 test:
 	python db-make.py ~/share/wiktionary/enwiktionary-20200501-pages-articles-multistream.xml.bz2
 	sqlite3 enwiktionary.db ".read db.sql"
+	sqlite3 enwiktionary.db ".read rank.sql" > rank.tsv
 	python db-template.py enwiktionary.db
 	python search-title.py enwiktionary.db
 	python collect-title.py enwiktionary.db Lojban.txt "^Appendix:Lojban/"
