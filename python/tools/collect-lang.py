@@ -9,7 +9,7 @@ def langtext(args):
     result = {}
     for lang in langs: result[lang] = []
     for title, id, ns, text in mediawiki_parse.getpages_xml(bz2.decompress(bz2data)):
-        if not text: continue
+        if ns != 0: continue
         for lang, text2 in mediawiki_parse.splittext(pattern, text):
             if lang in langs:
                 result[lang].append((title, "".join(text2).strip()))

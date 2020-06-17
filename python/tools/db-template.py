@@ -54,3 +54,10 @@ with sqlite3.connect(db) as conn:
         sys.stderr.write(f"\rreading `langname`... {i:,} / {count:,}")
         sys.stderr.flush()
     sys.stderr.write("\n")
+
+    count = cur.execute("SELECT COUNT(*) FROM langcode").fetchone()[0]
+    for i, (code, name) in enumerate(cur.execute(
+            "SELECT code, name FROM langcode"), start=1):
+        sys.stderr.write(f"\rreading `langcode`... {i:,} / {count:,}")
+        sys.stderr.flush()
+    sys.stderr.write("\n")

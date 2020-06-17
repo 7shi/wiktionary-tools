@@ -17,7 +17,7 @@ def getpages(data):
         while (line := t.readline()):
             line = line.lstrip()
             if line.startswith("<title>"):
-                title = line[7:line.find("<", 7)]
+                title = entity(line[7:line.find("<", 7)])
             elif line.startswith("<ns>"):
                 ns = int(line[4:line.find("<", 4)])
                 id = 0
@@ -26,13 +26,8 @@ def getpages(data):
             elif line.startswith("<text "):
                 p = line.find(">")
                 if line[p - 1] == "/": continue
-                if ns != 0:
-                    while not line.endswith("</text>\n"):
-                        line = t.readline()
-                    yield title, id, ns, None
-                    continue
                 first = line[p + 1:]
-                def text():
+                def f():
                     line = first
                     while line:
                         if line.endswith("</text>\n"):
@@ -42,7 +37,9 @@ def getpages(data):
                         else:
                             yield line
                         line = t.readline()
-                yield title, id, ns, text()
+                text = f()
+                yield title, id, ns, text
+                for _ in text: pass
 
 def getpages_xml(data):
     xml = data.decode("utf-8")
@@ -51,11 +48,8 @@ def getpages_xml(data):
         title = page.find("title").text
         ns = int(page.find("ns").text)
         id = int(page.find("id").text)
-        if ns != 0:
-            yield title, id, ns, None
-        else:
-            with io.StringIO(page.find("revision/text").text) as text:
-                yield title, id, ns, text
+        with io.StringIO(page.find("revision/text").text) as text:
+            yield title, id, ns, text
 
 def splittext(pattern, text):
     line = next(text, "")
@@ -71,4 +65,5 @@ def splittext(pattern, text):
             yield m[1].strip(), g()
 
 def entity(s):
+    if s.find("&") < 0: return s
     return s.replace("&quot;", '"').replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&")
