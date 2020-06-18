@@ -7,9 +7,9 @@ reading language codes...
 checking language names...
 writing DB files...
 
-real    4m30.913s
-user    9m36.641s
-sys     0m44.141s
+real    4m32.409s
+user    9m44.891s
+sys     0m43.563s
 ```
 ```
 $ time sqlite3 enwiktionary.db ".read db.sql"
@@ -20,10 +20,11 @@ importing 'db-pages.tsv'...
 importing 'db-idlang.tsv'...
 importing 'db-langname.tsv'...
 Importing 'db-langcode.tsv'...
+Importing 'db-templates.tsv'...
 
-real    0m49.350s
-user    0m36.375s
-sys     0m11.313s
+real    0m52.276s
+user    0m38.281s
+sys     0m12.391s
 ```
 ```
 $ time sqlite3 enwiktionary.db ".read rank.sql" > rank.tsv
