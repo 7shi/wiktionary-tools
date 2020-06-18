@@ -33,8 +33,8 @@ with sqlite3.connect(db) as conn:
     sys.stderr.write("\n")
 
     count = cur.execute("SELECT COUNT(*) FROM pages").fetchone()[0]
-    for i, (id, sid, ns, title) in enumerate(cur.execute(
-            "SELECT id, sid, ns, title FROM pages"), start=1):
+    for i, (id, sid, ns, redirect, title) in enumerate(cur.execute(
+            "SELECT id, sid, ns, redirect, title FROM pages"), start=1):
         if i == 1 or i % 10000 == 0 or i == count:
             sys.stderr.write(f"\rreading `pages`... {i:,} / {count:,}")
             sys.stderr.flush()
@@ -49,8 +49,8 @@ with sqlite3.connect(db) as conn:
     sys.stderr.write("\n")
 
     count = cur.execute("SELECT COUNT(*) FROM langname").fetchone()[0]
-    for i, (lid, name) in enumerate(cur.execute(
-            "SELECT lid, name FROM langname"), start=1):
+    for i, (lid, no, name) in enumerate(cur.execute(
+            "SELECT lid, no, name FROM langname"), start=1):
         sys.stderr.write(f"\rreading `langname`... {i:,} / {count:,}")
         sys.stderr.flush()
     sys.stderr.write("\n")
@@ -59,5 +59,12 @@ with sqlite3.connect(db) as conn:
     for i, (code, name) in enumerate(cur.execute(
             "SELECT code, name FROM langcode"), start=1):
         sys.stderr.write(f"\rreading `langcode`... {i:,} / {count:,}")
+        sys.stderr.flush()
+    sys.stderr.write("\n")
+
+    count = cur.execute("SELECT COUNT(*) FROM templates").fetchone()[0]
+    for i, (code, name) in enumerate(cur.execute(
+            "SELECT title, include FROM templates"), start=1):
+        sys.stderr.write(f"\rreading `templates`... {i:,} / {count:,}")
         sys.stderr.flush()
     sys.stderr.write("\n")
