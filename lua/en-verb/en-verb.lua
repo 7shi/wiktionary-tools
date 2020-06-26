@@ -1,5 +1,7 @@
-if not arg[1] then
-    print("usage: lua " .. arg[0] .. " parts word [args...]")
+start = 1
+if arg[1] == "-s" then start = 2 end
+if not arg[start] then
+    print("usage: lua " .. arg[0] .. " [-s] word [args...]")
     return
 end
 lualib = "mediawiki-extensions-Scribunto/includes/engines/LuaCommon/lualib/"
@@ -10,7 +12,7 @@ frame = {
     getParent = function()
         args = {}
         for k, v in pairs(arg) do
-            if k >= 2 then args[k - 1] = v end
+            if k > start then args[k - start] = v end
         end
         return {args = args}
     end,
@@ -25,10 +27,12 @@ mw = {
     loadData = require,
     title = {
         getCurrentTitle = function()
-            return { text = arg[1], subpageText = arg[1], }
+            return { text = arg[start], subpageText = arg[start], }
         end,
     },
     text    = require("text"),
     ustring = require("ustring/ustring"),
 }
-print(require("Module:en-headword").show(frame))
+result = require("Module:en-headword").show(frame)
+if start > 1 then result = string.gsub(result, "<.->", "") end
+print(result)
